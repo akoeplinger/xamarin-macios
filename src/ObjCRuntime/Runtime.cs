@@ -253,7 +253,9 @@ namespace ObjCRuntime {
 				Registrar = new DynamicRegistrar ();
 			RegisterDelegates (options);
 			Class.Initialize (options);
+#if false
 			Mono.SystemDependencyProvider.Initialize ();
+#endif
 			InitializePlatform (options);
 
 #if !XAMMAC_SYSTEM_MONO
@@ -277,7 +279,9 @@ namespace ObjCRuntime {
 				return has_autoreleasepool_in_thread_pool;
 			}
 			set {
+#if false
 				System.Threading._ThreadPoolWaitCallback.SetDispatcher (value ? new Func<Func<bool>, bool> (ThreadPoolDispatcher) : null);
+#endif
 				has_autoreleasepool_in_thread_pool = value;
 			}
 		}

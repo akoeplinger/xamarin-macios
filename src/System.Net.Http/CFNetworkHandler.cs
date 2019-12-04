@@ -194,7 +194,7 @@ namespace System.Net.Http
 			return req;
 		}
 
-		protected internal override async Task<HttpResponseMessage> SendAsync (HttpRequestMessage request, CancellationToken cancellationToken)
+		protected override async Task<HttpResponseMessage> SendAsync (HttpRequestMessage request, CancellationToken cancellationToken)
 		{
 			return await SendAsync (request, cancellationToken, true).ConfigureAwait (false);
 		}
@@ -358,8 +358,8 @@ namespace System.Net.Http
 					var key = entry.Key.ToString ();
 					var value = entry.Value == null ? string.Empty : entry.Value.ToString ();
 					HttpHeaders item_headers;
-					if (HttpHeaders.GetKnownHeaderKind (key) == Headers.HttpHeaderKind.Content) {
-						item_headers = response_msg.Content.Headers;
+					if (false /*HttpHeaders.GetKnownHeaderKind (key) == Headers.HttpHeaderKind.Content*/) {
+						//item_headers = response_msg.Content.Headers;
 					} else {
 						item_headers = response_msg.Headers;
 
@@ -383,7 +383,9 @@ namespace System.Net.Http
 		{
 			CookieCollection cookies1 = null;
 			try {
+#if false
 				cookies1 = cookies.CookieCutter (uri, header, value, false);
+#endif
 			} catch {
 			}
 

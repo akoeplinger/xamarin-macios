@@ -90,7 +90,7 @@ namespace Security {
 			if (certificate == null)
 				throw new ArgumentNullException ("certificate");
 
-#if NATIVE_APPLE_CERTIFICATE
+#if NATIVE_APPLE_CERTIFICATE && false
 			/*
 			 * This requires a recent Mono runtime which has the lazily-initialized
 			 * certifciates in mscorlib.dll, so we can't use it on XM classic.
@@ -110,7 +110,7 @@ namespace Security {
 			}
 		}
 
-#if NATIVE_APPLE_CERTIFICATE
+#if NATIVE_APPLE_CERTIFICATE && false
 		internal SecCertificate (X509CertificateImpl impl)
 		{
 			handle = impl.GetNativeAppleCertificate ();
@@ -130,7 +130,7 @@ namespace Security {
 			if (certificate == null)
 				throw new ArgumentNullException ("certificate");
 
-#if NATIVE_APPLE_CERTIFICATE
+#if NATIVE_APPLE_CERTIFICATE && false
 			handle = certificate.Impl.GetNativeAppleCertificate ();
 			if (handle != IntPtr.Zero) {
 				CFObject.CFRetain (handle);
@@ -189,7 +189,7 @@ namespace Security {
 
 		public X509Certificate ToX509Certificate ()
 		{
-#if NATIVE_APPLE_CERTIFICATE
+#if NATIVE_APPLE_CERTIFICATE && false
 			if (handle == IntPtr.Zero)
 				throw new ObjectDisposedException ("SecCertificate");
 

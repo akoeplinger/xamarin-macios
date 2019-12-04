@@ -409,9 +409,6 @@ namespace Foundation {
 			return nsrequest;
 		}
 
-#if SYSTEM_NET_HTTP || MONOMAC
-		internal
-#endif
 		protected override async Task<HttpResponseMessage> SendAsync (HttpRequestMessage request, CancellationToken cancellationToken)
 		{
 			Volatile.Write (ref sentRequest, true);
@@ -831,7 +828,7 @@ namespace Foundation {
 				base.Dispose (disposing);
 			}
 
-			protected internal override Task SerializeToStreamAsync (Stream stream, TransportContext context)
+			protected override Task SerializeToStreamAsync (Stream stream, TransportContext context)
 			{
 				if (contentCopied) {
 					if (!content.CanSeek) {
@@ -846,7 +843,7 @@ namespace Foundation {
 				return content.CopyToAsync (stream, bufferSize, cancellationToken);
 			}
 
-			protected internal override bool TryComputeLength (out long length)
+			protected override bool TryComputeLength (out long length)
 			{
 				if (!content.CanSeek) {
 					length = 0;

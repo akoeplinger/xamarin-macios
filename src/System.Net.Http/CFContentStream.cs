@@ -125,7 +125,7 @@ namespace System.Net.Http
 			data_event.Set ();
 		}
 
-		protected internal override async Task SerializeToStreamAsync (Stream stream, TransportContext context)
+		protected override async Task SerializeToStreamAsync (Stream stream, TransportContext context)
 		{
 			while (data_event.WaitOne ()) {
 				data_mutex.WaitOne ();
@@ -147,7 +147,7 @@ namespace System.Net.Http
 			}
 		}
 
-		protected internal override bool TryComputeLength (out long length)
+		protected override bool TryComputeLength (out long length)
 		{
 			length = 0;
 			return false;

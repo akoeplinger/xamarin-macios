@@ -121,11 +121,14 @@ $(BUILD_DIR)/ios.rsp: Makefile Makefile.generator frameworks.sources
 		$(IOS_APIS) \
 		> $@
 
+
+foo: $(IOS_BUILD_DIR)/native-64/Xamarin.iOS.dll
+
 define IOS_TARGETS_template
 # Xamarin.iOS.dll
 $(IOS_BUILD_DIR)/native-$(1)%Xamarin.iOS.dll $(IOS_BUILD_DIR)/native-$(1)%Xamarin.iOS.pdb: $$(IOS_SOURCES) $(IOS_BUILD_DIR)/native/generated_sources $(PRODUCT_KEY_PATH)
 	@mkdir -p $(IOS_BUILD_DIR)/native-$(1)
-	$$(call Q_PROF_CSC,ios/$(1) bit) $$(IOS_CSC) -nologo -out:$$@ -target:library -debug -unsafe -optimize \
+	$$(call Q_PROF_CSC,ios/$(1) bit) csc -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.Private.CoreLib.dll -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.Runtime.dll -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.Net.Http.dll -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.Collections.NonGeneric.dll -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.Net.Requests.dll -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.Runtime.InteropServices.dll -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.Private.Uri.dll -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.IO.FileSystem.dll -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.Runtime.Extensions.dll -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.Net.Primitives.dll -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.Net.dll -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.Xml.XmlSerializer.dll -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.Xml.ReaderWriter.dll -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.Xml.Serialization.dll -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.Security.Cryptography.X509Certificates.dll -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.Private.Xml.dll -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.Collections.dll -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.Net.Security.dll -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.Linq.dll -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.IO.Compression.dll -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.Drawing.Primitives.dll -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.Net.Sockets.dll -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.Console.dll -r:/Users/alexander/dev/mono/sdks/out/ios-netcore_libs/ios/System.Net.ServicePoint.dll -deterministic -noconfig -nologo -nostdlib -out:$$@ -target:library -debug -unsafe -optimize \
 		-deterministic \
 		$$(ARGS_$(1)) \
 		-publicsign -keyfile:$(PRODUCT_KEY_PATH) $$(IOS_DEFINES) \
